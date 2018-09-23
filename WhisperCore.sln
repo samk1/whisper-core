@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhisperCore", "WhisperCore\WhisperCore.csproj", "{47494C04-AF4D-40D4-9710-FE98A2154DC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhisperCore.Tests", "WhisperCore.Tests\WhisperCore.Tests.csproj", "{AD4B3426-47B9-4F9A-B0DA-894103A485A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47494C04-AF4D-40D4-9710-FE98A2154DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47494C04-AF4D-40D4-9710-FE98A2154DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47494C04-AF4D-40D4-9710-FE98A2154DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47494C04-AF4D-40D4-9710-FE98A2154DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4B3426-47B9-4F9A-B0DA-894103A485A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4B3426-47B9-4F9A-B0DA-894103A485A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4B3426-47B9-4F9A-B0DA-894103A485A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4B3426-47B9-4F9A-B0DA-894103A485A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B97380D1-5455-4139-A788-2E869C7B2D34}
+	EndGlobalSection
+EndGlobal
