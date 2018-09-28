@@ -1,15 +1,27 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace WhisperCore.Format
+﻿namespace WhisperCore.Format
 {
-    public class WhisperArchive : WhisperCore.Format.Interfaces.IWhisperArchive
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using WhisperCore.Format.Interfaces;
+
+    public class WhisperArchive : IWhisperArchive
     {
-        public WhisperArchive(WhisperCore.Format.Interfaces.IWhisperArchiveInfo archiveInfo, FileStream whisperFile)
+        private readonly WhisperPointList points;
+        
+        public WhisperArchive(IWhisperArchiveInfo archiveInfo, Stream whisperFile)
         {
-            this.Points = new WhisperPointList(archiveInfo, whisperFile);
+            this.points = new WhisperPointList(archiveInfo, whisperFile);
+            this.ArchiveInfo = archiveInfo;
         }
 
-        public IReadOnlyList<WhisperCore.Format.Interfaces.IWhisperPoint> Points { get; }
+        public IReadOnlyList<IWhisperPoint> Points => this.points;
+        
+        public IWhisperArchiveInfo ArchiveInfo { get; }
+        
+        public void WritePoint(DateTime timestamp, double value)
+        {
+            this.points.WritePoint(timestamp, value);
+        }
     }
 }

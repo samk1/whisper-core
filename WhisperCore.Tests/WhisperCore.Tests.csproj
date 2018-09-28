@@ -20,6 +20,9 @@
     <None Update="testfiles\1minute_1day.whisper">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="testfiles\1minute_1day_writer.whisper">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

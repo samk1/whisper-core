@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace WhisperCore.Format
+﻿namespace WhisperCore.Format
 {
-    public class WhisperHeader : WhisperCore.Format.Interfaces.IWhisperHeader
+    using System.Collections.Generic;
+    using System.IO;
+    using WhisperCore.Format.Interfaces;
+
+    public class WhisperHeader : IWhisperHeader
     {
-        private readonly FileStream whisperFile;
+        private readonly Stream whisperFile;
 
-        private WhisperCore.Format.Interfaces.IWhisperMetadata metadata;
+        private IWhisperMetadata metadata;
 
-        public WhisperHeader(FileStream whisperFile)
+        public WhisperHeader(Stream whisperFile)
         {
             this.whisperFile = whisperFile;
         }
 
-        public IEnumerable<WhisperCore.Format.Interfaces.IWhisperArchiveInfo> ArchiveInfo
+        public IEnumerable<IWhisperArchiveInfo> ArchiveInfo
         {
             get
             {
@@ -33,7 +34,7 @@ namespace WhisperCore.Format
             }
         }
 
-        public WhisperCore.Format.Interfaces.IWhisperMetadata Metadata
+        public IWhisperMetadata Metadata
         {
             get
             {

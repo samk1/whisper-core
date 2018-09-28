@@ -6,14 +6,16 @@ namespace WhisperCore.Format
 {
     public class WhisperPoint : WhisperCore.Format.Interfaces.IWhisperPoint
     {
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        
 
         public WhisperPoint(byte[] buffer)
         {
             var secondsSinceEpoch = BinaryPrimitives.ReadUInt32BigEndian(
                 buffer.AsSpan(WhisperPointOffsets.Timestamp, sizeof(uint)));
 
-            this.Timestamp = Epoch.AddSeconds(secondsSinceEpoch);
+            this.IntTimestamp = secondsSinceEpoch;
+            
+            this.Timestamp = DateTimeExtensions.Epoch.AddSeconds(secondsSinceEpoch);
 
             var doubleBuffer = new byte[sizeof(double)];
             buffer.AsSpan(WhisperPointOffsets.Value, sizeof(double)).CopyTo(doubleBuffer);
@@ -29,8 +31,9 @@ namespace WhisperCore.Format
             
             byte[] buffer = new byte[WhisperPointOffsets.TotalSize];
             
-            uint secondsSinceEpoch = (uint) (((TimeSpan) (timestamp - Epoch)).TotalSeconds);
-                        
+            uint secondsSinceEpoch = (uint) timestamp.SecondsSinceEpoch();
+            this.IntTimestamp = secondsSinceEpoch;            
+            
             BinaryPrimitives.WriteUInt32BigEndian(
                 buffer.AsSpan(WhisperPointOffsets.Timestamp, sizeof(uint)), secondsSinceEpoch);
             
@@ -39,6 +42,8 @@ namespace WhisperCore.Format
 
             this.Buffer = buffer;
         }
+        
+        public uint IntTimestamp { get; }
 
         public DateTime Timestamp { get; }
 

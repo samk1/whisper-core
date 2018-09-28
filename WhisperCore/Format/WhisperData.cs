@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace WhisperCore.Format
+﻿namespace WhisperCore.Format
 {
-    public class WhisperData : WhisperCore.Format.Interfaces.IWhisperData
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using WhisperCore.Format.Interfaces;
+
+    public class WhisperData : IWhisperData
     {
-        private readonly WhisperCore.Format.Interfaces.IWhisperHeader header;
+        private readonly IWhisperHeader header;
 
-        private readonly FileStream whisperFile;
+        private readonly Stream whisperFile;
 
-        public WhisperData(FileStream whisperFile, WhisperCore.Format.Interfaces.IWhisperHeader header)
+        public WhisperData(Stream whisperFile, IWhisperHeader header)
         {
             this.whisperFile = whisperFile;
             this.header = header;
         }
 
-        public IEnumerable<WhisperCore.Format.Interfaces.IWhisperArchive> Archives
+        public IEnumerable<IWhisperArchive> Archives
         {
             get
             {
