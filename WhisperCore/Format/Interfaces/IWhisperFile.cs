@@ -1,4 +1,4 @@
-﻿namespace WhisperCore.Interfaces
+﻿namespace WhisperCore.Format.Interfaces
 {
     public interface IWhisperFile
     {

@@ -1,7 +1,7 @@
-﻿namespace WhisperCore.Interfaces
-{
-    using System;
+﻿using System;
 
+namespace WhisperCore.Format.Interfaces
+{
     public interface IWhisperPoint
     {
         DateTime Timestamp { get; }

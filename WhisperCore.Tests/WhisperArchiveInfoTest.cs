@@ -2,18 +2,16 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WhisperCore.Interfaces;
-
     [TestClass]
     public class WhisperArchiveInfoTest
     {
-        private IWhisperArchiveInfo archiveInfo;
+        private WhisperCore.Format.Interfaces.IWhisperArchiveInfo archiveInfo;
 
         [TestInitialize]
         public void InitialiseArchiveInfo()
         {
             byte[] archiveInfoBuffer = { 0, 0, 0, 28, 0, 0, 0, 60, 0, 0, 5, 160 };
-            this.archiveInfo = new WhisperArchiveInfo(archiveInfoBuffer);
+            this.archiveInfo = new WhisperCore.Format.WhisperArchiveInfo(archiveInfoBuffer);
         }
 
         [TestMethod]

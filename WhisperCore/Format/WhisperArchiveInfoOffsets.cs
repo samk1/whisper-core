@@ -1,4 +1,4 @@
-﻿namespace WhisperCore
+﻿namespace WhisperCore.Format
 {
     public static class WhisperArchiveInfoOffsets
     {

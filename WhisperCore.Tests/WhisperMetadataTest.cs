@@ -4,18 +4,16 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WhisperCore.Interfaces;
-
     [TestClass]
     public class WhisperMetadataTest
     {
-        private IWhisperMetadata whisperMetadata;
+        private WhisperCore.Format.Interfaces.IWhisperMetadata whisperMetadata;
 
         [TestInitialize]
         public void InitialiseWhisperMetadata()
         {
             byte[] metadataBuffer = { 0, 0, 0, 1, 0, 1, 81, 128, 63, 0, 0, 0, 0, 0, 0, 1 };
-            this.whisperMetadata = new WhisperMetadata(metadataBuffer);
+            this.whisperMetadata = new WhisperCore.Format.WhisperMetadata(metadataBuffer);
         }
 
         [TestMethod]
@@ -27,7 +25,7 @@
         [TestMethod]
         public void Property_AggregationType()
         {
-            Assert.AreEqual(WhisperAggregationType.Average, this.whisperMetadata.AggregationType);
+            Assert.AreEqual(WhisperCore.Format.Interfaces.WhisperAggregationType.Average, this.whisperMetadata.AggregationType);
         }
 
         [TestMethod]

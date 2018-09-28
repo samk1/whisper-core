@@ -5,19 +5,17 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WhisperCore.Interfaces;
-
     [TestClass]
     [DeploymentItem("testfiles/1minute_1day.whisper")]
     public class WhisperDataTest
     {
-        private IWhisperData whisperData;
+        private WhisperCore.Format.Interfaces.IWhisperData whisperData;
 
         [TestInitialize]
         public void InitialiseWhisperData()
         {
             var whisperFile = File.OpenRead("testfiles/1minute_1day.whisper");
-            this.whisperData = new WhisperData(whisperFile, new WhisperHeader(whisperFile));
+            this.whisperData = new WhisperCore.Format.WhisperData(whisperFile, new WhisperCore.Format.WhisperHeader(whisperFile));
         }
 
         [TestMethod]

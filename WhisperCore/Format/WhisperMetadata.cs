@@ -1,15 +1,13 @@
-﻿namespace WhisperCore
+﻿using System;
+using System.Buffers.Binary;
+
+namespace WhisperCore.Format
 {
-    using System;
-    using System.Buffers.Binary;
-
-    using WhisperCore.Interfaces;
-
-    public class WhisperMetadata : IWhisperMetadata
+    public class WhisperMetadata : WhisperCore.Format.Interfaces.IWhisperMetadata
     {
         private readonly byte[] metadataBuffer;
 
-        private WhisperAggregationType? aggregationType;
+        private WhisperCore.Format.Interfaces.WhisperAggregationType? aggregationType;
 
         private uint? archiveCount;
 
@@ -22,7 +20,7 @@
             this.metadataBuffer = metadataBuffer;
         }
 
-        public WhisperAggregationType AggregationType
+        public WhisperCore.Format.Interfaces.WhisperAggregationType AggregationType
         {
             get
             {
@@ -30,7 +28,7 @@
                 {
                     var aggregationTypeValue = BinaryPrimitives.ReadUInt32BigEndian(
                         this.metadataBuffer.AsSpan(WhisperMetadataOffsets.AggregationType, sizeof(uint)));
-                    this.aggregationType = (WhisperAggregationType)aggregationTypeValue;
+                    this.aggregationType = (WhisperCore.Format.Interfaces.WhisperAggregationType)aggregationTypeValue;
                 }
 
                 return this.aggregationType.Value;

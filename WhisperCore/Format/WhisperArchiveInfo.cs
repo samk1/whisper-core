@@ -1,11 +1,9 @@
-﻿namespace WhisperCore
+﻿using System;
+using System.Buffers.Binary;
+
+namespace WhisperCore.Format
 {
-    using System;
-    using System.Buffers.Binary;
-
-    using WhisperCore.Interfaces;
-
-    public class WhisperArchiveInfo : IWhisperArchiveInfo
+    public class WhisperArchiveInfo : WhisperCore.Format.Interfaces.IWhisperArchiveInfo
     {
         private readonly byte[] archiveInfoBuffer;
 

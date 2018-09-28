@@ -1,13 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Buffers.Binary;
+using System.Linq;
 
-namespace WhisperCore
+namespace WhisperCore.Format
 {
-    using System;
-    using System.Buffers.Binary;
-
-    using WhisperCore.Interfaces;
-
-    public class WhisperPoint : IWhisperPoint
+    public class WhisperPoint : WhisperCore.Format.Interfaces.IWhisperPoint
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 

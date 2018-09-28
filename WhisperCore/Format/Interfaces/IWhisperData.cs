@@ -1,7 +1,7 @@
-﻿namespace WhisperCore.Interfaces
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace WhisperCore.Format.Interfaces
+{
     public interface IWhisperData
     {
         IEnumerable<IWhisperArchive> Archives { get; }

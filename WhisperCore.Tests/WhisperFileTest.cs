@@ -4,18 +4,16 @@ namespace WhisperCore.Tests
     
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WhisperCore.Interfaces;
-
     [TestClass]
     [DeploymentItem("testfiles/1minute_1day.whisper")]
     public class WhisperFileTest
     {
-        private IWhisperFile whisperFile;
+        private WhisperCore.Format.Interfaces.IWhisperFile whisperFile;
 
         [TestInitialize]
         public void InitialiseWhisperFile()
         {
-            this.whisperFile = new WhisperFile("testfiles/1minute_1day.whisper");
+            this.whisperFile = new WhisperCore.Format.WhisperFile("testfiles/1minute_1day.whisper");
         }
 
         [TestMethod]
@@ -55,7 +53,7 @@ namespace WhisperCore.Tests
             {
                 try
                 {
-                    var file = new WhisperFile(path);
+                    var file = new WhisperCore.Format.WhisperFile(path);
                 }
                 catch (FileNotFoundException exception)
                 {

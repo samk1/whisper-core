@@ -4,20 +4,18 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using WhisperCore.Interfaces;
-
     [TestClass]
     public class WhisperPointTest
     {
-        private IWhisperPoint whisperPointFromBuffer;
-        private WhisperPoint whisperPointFromUpdate;
+        private WhisperCore.Format.Interfaces.IWhisperPoint whisperPointFromBuffer;
+        private WhisperCore.Format.WhisperPoint whisperPointFromUpdate;
 
         [TestInitialize]
         public void InitialiseWhisperPoint()
         {
             byte[] pointBuffer = { 91, 167, 108, 144, 64, 89, 0, 0, 0, 0, 0, 0 };
-            this.whisperPointFromBuffer = new WhisperPoint(pointBuffer);
-            this.whisperPointFromUpdate = new WhisperPoint(DateTime.Parse("23 September 2018 10:36:00"), 100);
+            this.whisperPointFromBuffer = new WhisperCore.Format.WhisperPoint(pointBuffer);
+            this.whisperPointFromUpdate = new WhisperCore.Format.WhisperPoint(DateTime.Parse("23 September 2018 10:36:00"), 100);
         }
 
         [TestMethod]

@@ -1,18 +1,16 @@
 
 
-namespace WhisperCore
-{
-    using System.IO;
-    using System.Collections;
-    using System.Collections.Generic;
-    
-    using WhisperCore.Interfaces;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 
+namespace WhisperCore.Format
+{
     public class WhisperPointList : IReadOnlyList<WhisperPoint>
     {
         private readonly WhisperPointEnumerator enumerator;
 
-        public WhisperPointList(IWhisperArchiveInfo archiveInfo, FileStream whisperFile)
+        public WhisperPointList(WhisperCore.Format.Interfaces.IWhisperArchiveInfo archiveInfo, FileStream whisperFile)
         {
             this.Count = (int) archiveInfo.Points;
             this.enumerator = new WhisperPointEnumerator(whisperFile, archiveInfo);
@@ -28,11 +26,11 @@ namespace WhisperCore
         
         private class WhisperPointEnumerator : IEnumerator<WhisperPoint>
         {
-            private readonly IWhisperArchiveInfo archiveInfo;
+            private readonly WhisperCore.Format.Interfaces.IWhisperArchiveInfo archiveInfo;
             private readonly FileStream whisperFile;
             private int index;
 
-            public WhisperPointEnumerator(FileStream whisperFile, IWhisperArchiveInfo archiveInfo)
+            public WhisperPointEnumerator(FileStream whisperFile, WhisperCore.Format.Interfaces.IWhisperArchiveInfo archiveInfo)
             {
                 this.whisperFile = whisperFile;
                 this.archiveInfo = archiveInfo;
