@@ -1,4 +1,6 @@
-﻿namespace WhisperCore
+﻿using System.Linq;
+
+namespace WhisperCore
 {
     using System;
     using System.Buffers.Binary;
@@ -9,46 +11,42 @@
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        private readonly byte[] pointBuffer;
-
-        private DateTime? timestamp;
-
-        private double? value;
-
-        public WhisperPoint(byte[] pointBuffer)
+        public WhisperPoint(byte[] buffer)
         {
-            this.pointBuffer = pointBuffer;
+            var secondsSinceEpoch = BinaryPrimitives.ReadUInt32BigEndian(
+                buffer.AsSpan(WhisperPointOffsets.Timestamp, sizeof(uint)));
+
+            this.Timestamp = Epoch.AddSeconds(secondsSinceEpoch);
+
+            var doubleBuffer = new byte[sizeof(double)];
+            buffer.AsSpan(WhisperPointOffsets.Value, sizeof(double)).CopyTo(doubleBuffer);
+            this.Value = BitConverter.ToDouble(doubleBuffer.Reverse().ToArray(), 0);
+
+            this.Buffer = buffer;
         }
 
-        public DateTime Timestamp
+        public WhisperPoint(DateTime timestamp, double value)
         {
-            get
-            {
-                if (this.timestamp == null)
-                {
-                    var secondsSinceEpoch = BinaryPrimitives.ReadUInt32BigEndian(
-                        this.pointBuffer.AsSpan(WhisperPointOffsets.Timestamp, sizeof(uint)));
+            this.Timestamp = timestamp;
+            this.Value = value;
+            
+            byte[] buffer = new byte[WhisperPointOffsets.TotalSize];
+            
+            uint secondsSinceEpoch = (uint) (((TimeSpan) (timestamp - Epoch)).TotalSeconds);
+                        
+            BinaryPrimitives.WriteUInt32BigEndian(
+                buffer.AsSpan(WhisperPointOffsets.Timestamp, sizeof(uint)), secondsSinceEpoch);
+            
+            BitConverter.GetBytes(value).Reverse().ToArray()
+                .CopyTo(buffer.AsSpan(WhisperPointOffsets.Value, sizeof(double)));
 
-                    this.timestamp = Epoch.AddSeconds(secondsSinceEpoch);
-                }
-
-                return this.timestamp.Value;
-            }
+            this.Buffer = buffer;
         }
 
-        public double Value
-        {
-            get
-            {
-                if (this.value == null)
-                {
-                    var doubleBuffer = this.pointBuffer.AsSpan(WhisperPointOffsets.Value, sizeof(double));
-                    doubleBuffer.Reverse();
-                    this.value = BitConverter.ToDouble(doubleBuffer.ToArray(), 0);
-                }
+        public DateTime Timestamp { get; }
 
-                return this.value.Value;
-            }
-        }
+        public double Value { get; }
+
+        public byte[] Buffer { get; }
     }
 }

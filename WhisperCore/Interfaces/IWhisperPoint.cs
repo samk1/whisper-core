@@ -7,5 +7,7 @@
         DateTime Timestamp { get; }
 
         double Value { get; }
+        
+        byte[] Buffer { get; }
     }
 }
