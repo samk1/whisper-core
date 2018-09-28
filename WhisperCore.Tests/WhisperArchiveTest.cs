@@ -33,9 +33,65 @@
         }
 
         [TestMethod]
-        public void Property_Points_CountIs1440()
+        public void Property_Points_EnumeratorCountIs1440()
         {
             Assert.AreEqual(1440, this.whisperArchive.Points.Count());
+        }
+        
+        [TestMethod]
+        public void Property_Points_PropertyCountIs1440()
+        {
+            Assert.AreEqual(1440, this.whisperArchive.Points.Count);
+        }
+
+        [TestMethod]
+        public void Property_Points_CanBeIndexed()
+        {
+            Assert.IsNotNull(this.whisperArchive.Points[0]);
+        }
+
+        [TestMethod]
+        public void Property_Points_CanAccessGenericEnumerator()
+        {
+            Assert.IsNotNull(this.whisperArchive.Points.GetEnumerator());
+        }
+
+        [TestMethod]
+        public void Property_Points_CanAccessNonGenericEnumerator()
+        {
+            Assert.IsNotNull(((System.Collections.IEnumerable)this.whisperArchive.Points).GetEnumerator());
+        }
+
+        [TestMethod]
+        public void Property_Points_GenericEnumerator_CanReset()
+        {
+            using (var enumerator = this.whisperArchive.Points.GetEnumerator())
+            {
+                enumerator.Reset();
+            };
+        }
+
+        [TestMethod]
+        public void Property_Points_GenericEnumerator_CanDispose()
+        {
+            var enumerator = this.whisperArchive.Points.GetEnumerator();
+            enumerator.Dispose();
+        }
+
+        [TestMethod]
+        public void Property_Points_GenericEnumerator_CanAccessCurrent()
+        {
+            using (var enumerator = this.whisperArchive.Points.GetEnumerator())
+            {
+                Assert.IsNotNull(enumerator.Current);
+            }
+        }
+
+        [TestMethod]
+        public void Property_Points_NonGenericEnumerator_CanAccessCurrent()
+        {
+            var enumerator = ((System.Collections.IEnumerable) this.whisperArchive.Points).GetEnumerator();
+            Assert.IsNotNull(enumerator.Current);
         }
     }
 }

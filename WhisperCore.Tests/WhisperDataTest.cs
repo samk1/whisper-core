@@ -33,9 +33,11 @@
         }
 
         [TestMethod]
-        public void Property_Archives_CountIsOne()
+        public void Property_Archives_EnumeratorCountIsOne()
         {
             Assert.AreEqual(1, this.whisperData.Archives.Count());
         }
+        
+        
     }
 }

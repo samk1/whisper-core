@@ -1,7 +1,7 @@
 namespace WhisperCore.Tests
 {
-    using System.Runtime.CompilerServices;
-
+    using System.IO;
+    
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using WhisperCore.Interfaces;
@@ -34,6 +34,36 @@ namespace WhisperCore.Tests
         public void Property_Data()
         {
             Assert.IsNotNull(this.whisperFile.Data);
+        }
+
+        [TestMethod]
+        public void Property_Path_Exists()
+        {
+            Assert.IsTrue(File.Exists(this.whisperFile.Path));
+        }
+
+        [TestMethod]
+        public void Constructor_NonExistentFile()
+        {
+            string path = System.Guid.NewGuid().ToString();
+
+            if (File.Exists(path))
+            {
+                Assert.Inconclusive("The test file exists");
+            }
+            else
+            {
+                try
+                {
+                    var file = new WhisperFile(path);
+                }
+                catch (FileNotFoundException exception)
+                {
+                    return;
+                }
+            }
+            
+            Assert.Fail("The constructor did not detect the non-existent file");
         }
     }
 }
