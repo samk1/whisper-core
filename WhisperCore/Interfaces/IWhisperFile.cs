@@ -5,5 +5,7 @@
         IWhisperData Data { get; }
 
         IWhisperHeader Header { get; }
+        
+        string Path { get; }
     }
 }
