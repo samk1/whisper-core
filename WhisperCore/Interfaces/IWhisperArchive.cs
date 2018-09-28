@@ -4,6 +4,6 @@
 
     public interface IWhisperArchive
     {
-        IEnumerable<IWhisperPoint> Points { get; }
+        IReadOnlyList<IWhisperPoint> Points { get; }
     }
 }
